@@ -5,12 +5,6 @@ const { Menu: { ContextMenu, MenuItem, SubMenu } } = require('react-data-grid-ad
 // Create the context menu.
 // Use this.props.rowIdx and this.props.idx to get the row/column where the menu is shown.
 export default class MyContextMenu extends React.Component {
-    static propTypes = {
-          
-      rowIdx: PropTypes.string.isRequired,
-      idx: PropTypes.string.isRequired,
-      id: PropTypes.string.isRequired
-    };
   
     onHighlightBue = (e,data) =>{
         console.log(this.props);
@@ -22,7 +16,11 @@ export default class MyContextMenu extends React.Component {
   
       return (
         <ContextMenu id={id}>
-          <MenuItem data={{ rowIdx, idx }} onClick={this.onHighlightBue}>Highlight Blue</MenuItem>
+          <SubMenu title="Highlight">
+            <MenuItem data={{ rowIdx, idx,color:"cellBlue" }} onClick={this.onHighlightBue}>Blue</MenuItem>
+            <MenuItem data={{ rowIdx, idx,color:"cellRed" }} onClick={this.onHighlightBue}>Red</MenuItem>
+          </SubMenu>
+
         </ContextMenu>
       );
     }

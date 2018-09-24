@@ -148,6 +148,9 @@ padding: 0;
   display: block;
 }
 
-.cred{
+.cellBlue{
   background-color:lightblue !important;
+}
+.cellRed{
+  background-color:lightcoral !important;
 }

@@ -2,15 +2,10 @@ import update from 'immutability-helper';
 import InputBox from './inputBox';
 import MyContextMenu from './contextMenu';
 import RowRenderer from './rRender'
+import AutoSugg from './autoSuggest'
 const ReactDataGrid = require('react-data-grid');
 const React = require('react');
 
-export const UserContext = React.createContext({
-  highlightedCells: [1,2],
-  update:(add)=>{
-    this.highlightedCells.concat([3])
-  }
-});
 
 
 const { Editors, Formatters } = require('react-data-grid-addons');
@@ -100,14 +95,14 @@ export default class Grid extends React.Component {
 
        this.setState({ rows });
      }
-
+      console.log(e)
    };
   handleGridRowsUpdated = ({ fromRow, toRow, updated }) => {
     let rows = this.state.rows.slice();
 
     if(!updated)
       return
-    debugger
+
     for (let i = fromRow; i <= toRow; i++) {
       let rowToUpdate = rows[i];
       let updatedRow = update(rowToUpdate, {$merge:updated});
@@ -127,7 +122,7 @@ export default class Grid extends React.Component {
 
   render() {
     return (
-      <UserContext.Provider>
+      
         
       <ReactDataGrid
         contextMenu={<MyContextMenu onHighlightBue={this.highlightCell} />}
@@ -140,7 +135,7 @@ export default class Grid extends React.Component {
         onGridKeyDown={this.onKeyDown}
         rowRenderer={<RowRenderer highlightedCells={this.state.highlightedCells}/>}
         />
-        </UserContext.Provider>);
+        );
   }
 }
 

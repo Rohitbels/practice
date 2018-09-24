@@ -6,13 +6,15 @@ class CellRenderer extends Component {
     render() {      
 //        const hl = this.context.shouldHighlight(this.props.rowData.id, this.props.column.key);
     var hl=true;
-
-    console.log(this.props)
+    var cl="";
     var res=this.props.highlightedCells.filter((item)=>
         {
                 if(this.props.rowIdx===item.rowIdx && this.props.idx===item.idx)
-                    return true;
-                else
+    { 
+                    cl=item.color;
+                       return true;
+               
+    }           else
                     return false;            
         })
     if(res.length>0 )
@@ -21,7 +23,7 @@ class CellRenderer extends Component {
      hl=false;    
     return (
                 
-            <Cell {...this.props} className={hl?"cred":""}/>
+            <Cell {...this.props} className={hl?cl:""}/>
            );
     }
 }
@@ -33,6 +35,6 @@ export default class RowRenderer extends Component {
         
         var g=this.props.highlightedCells;
 
-        return <Row cellRenderer={(v) =>(<CellRenderer highlightedCells={g} {...v}/>)} ref="row" {...this.props} />;
+        return <Row cellRenderer={(v) =>(<CellRenderer highlightedCells={g} {...v}/>)}  {...this.props} />;
     }
 }
